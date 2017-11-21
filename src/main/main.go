@@ -65,9 +65,11 @@ func agent(writer http.ResponseWriter, request *http.Request) {
 		case strings.EqualFold("PUT", m) && strings.HasPrefix(u, "ftp"):
 		case strings.EqualFold("GET", m) && strings.HasPrefix(u, "ftps"):
 		case strings.EqualFold("PUT", m) && strings.HasPrefix(u, "ftps"):
+		default:
+			log.Fatalf("accept wrong request %v\n only post was accepted", request)
+			fmt.Fprintf(writer, "{\"code\":\"99\",\"desc\":\"wrong request %v\"\n", request)
 
 		}
-
 		return
 	}
 	log.Fatalf("accept wrong request %v\n only post was accepted", request)
