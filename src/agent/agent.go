@@ -18,7 +18,7 @@ const (
 
 func agent(w http.ResponseWriter, r *http.Request) {
 
-	if "POST" != r.Method {
+	if http.MethodPost != r.Method {
 		log.Fatalf("accept wrong request %v\n only post was accepted", r)
 		error := fmt.Sprintf("Only POST method was accepted but %s reveived", r.Method)
 		http.Error(w, error, http.StatusMethodNotAllowed)
@@ -51,7 +51,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 	u := string(ubytes)
 	if !strings.EqualFold(m, "") && !strings.EqualFold(u, "") {
 		switch {
-		case (strings.EqualFold("GET", m) || strings.EqualFold("DELETE", m)) && strings.HasPrefix(u, "http"):
+		case (strings.EqualFold(http.MethodGet, m) || strings.EqualFold(http.MethodDelete, m)) && strings.HasPrefix(u, "http"):
 			req, err := http.NewRequest(m, u, nil)
 			if nil != err {
 				log.Fatalf("%v\n", err)
@@ -73,7 +73,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				error := fmt.Sprintf("%v\n", err)
 				http.Error(w, error, http.StatusBadRequest)
 			}
-		case (strings.EqualFold("PUT", m) || strings.EqualFold("POST", m)) && strings.HasPrefix(u, "http"):
+		case (strings.EqualFold(http.MethodPut, m) || strings.EqualFold(http.MethodPost, m)) && strings.HasPrefix(u, "http"):
 			req, err := http.NewRequest(m, u, r.Body)
 			if nil != err {
 				log.Fatalf("%v\n", err)
@@ -96,11 +96,11 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, error, http.StatusBadRequest)
 				return
 			}
-		case strings.EqualFold("GET", m) && strings.HasPrefix(u, "https"):
-		case strings.EqualFold("PUT", m) && strings.HasPrefix(u, "https"):
-		case strings.EqualFold("POST", m) && strings.HasPrefix(u, "https"):
-		case strings.EqualFold("DELETE", m) && strings.HasPrefix(u, "https"):
-		case strings.EqualFold("GET", m) && strings.HasPrefix(u, "ftp"):
+		case strings.EqualFold(http.MethodGet, m) && strings.HasPrefix(u, "https"):
+		case strings.EqualFold(http.MethodPut, m) && strings.HasPrefix(u, "https"):
+		case strings.EqualFold(http.MethodPost, m) && strings.HasPrefix(u, "https"):
+		case strings.EqualFold(http.MethodDelete, m) && strings.HasPrefix(u, "https"):
+		case strings.EqualFold(http.MethodGet, m) && strings.HasPrefix(u, "ftp"):
 			ftpUrl, err := url.Parse(u)
 			if nil != err {
 				log.Fatalf("%v\n", err)
@@ -145,7 +145,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-		case strings.EqualFold("PUT", m) && strings.HasPrefix(u, "ftp"):
+		case strings.EqualFold(http.MethodPut, m) && strings.HasPrefix(u, "ftp"):
 			ftpUrl, err := url.Parse(u)
 			if nil != err {
 				log.Fatalf("%v\n", err)
@@ -189,10 +189,10 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, error, http.StatusBadRequest)
 				return
 			}
-		case strings.EqualFold("DELETE", m) && strings.HasPrefix(u, "ftp"):
-		case strings.EqualFold("GET", m) && strings.HasPrefix(u, "ftps"):
-		case strings.EqualFold("PUT", m) && strings.HasPrefix(u, "ftps"):
-		case strings.EqualFold("DELETE", m) && strings.HasPrefix(u, "ftps"):
+		case strings.EqualFold(http.MethodDelete, m) && strings.HasPrefix(u, "ftp"):
+		case strings.EqualFold(http.MethodGet, m) && strings.HasPrefix(u, "ftps"):
+		case strings.EqualFold(http.MethodPut, m) && strings.HasPrefix(u, "ftps"):
+		case strings.EqualFold(http.MethodDelete, m) && strings.HasPrefix(u, "ftps"):
 		default:
 			log.Fatalf("accept wrong request %v\n only post was accepted", r)
 			fmt.Fprintf(w, "{\"code\":\"99\",\"desc\":\"wrong request %v\"\n", r)
