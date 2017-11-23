@@ -8,5 +8,5 @@ import (
 func StartServer() {
 	http.HandleFunc("/agent", agent)
 	http.HandleFunc("/admin", admin)
-	log.Fatalln(http.ListenAndServe("localhost:8000", nil))
+	log.Fatalln(http.ListenAndServe(":8000", nil))
 }
