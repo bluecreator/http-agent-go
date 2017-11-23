@@ -68,6 +68,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			_, err = io.Copy(w, resp.Body)
+			defer resp.Body.Close()
 			if nil != err {
 				log.Fatalf("%v\n", err)
 				error := fmt.Sprintf("%v\n", err)
@@ -90,6 +91,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 			_, err = io.Copy(w, resp.Body)
+			defer resp.Body.Close()
 			if nil != err {
 				log.Fatalf("%v\n", err)
 				error := fmt.Sprintf("%v\n", err)
@@ -189,6 +191,21 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				http.Error(w, error, http.StatusBadRequest)
 				return
 			}
+			err = server.Logout()
+			if nil != err {
+				log.Fatalf("%v\n", err)
+				error := fmt.Sprintf("%v\n", err)
+				http.Error(w, error, http.StatusBadRequest)
+				return
+			}
+			err = server.Quit()
+			if nil != err {
+				log.Fatalf("%v\n", err)
+				error := fmt.Sprintf("%v\n", err)
+				http.Error(w, error, http.StatusBadRequest)
+				return
+			}
+
 		case strings.EqualFold(http.MethodDelete, m) && strings.HasPrefix(u, "ftp"):
 		case strings.EqualFold(http.MethodGet, m) && strings.HasPrefix(u, "ftps"):
 		case strings.EqualFold(http.MethodPut, m) && strings.HasPrefix(u, "ftps"):
