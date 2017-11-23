@@ -137,7 +137,7 @@ func Test_agent(t *testing.T) {
 	u = base64.StdEncoding.EncodeToString([]byte(u))
 	
 	// Create buffer
-    buf := new(bytes.Buffer) // caveat IMO dont use this for large files, \
+    buf = new(bytes.Buffer) // caveat IMO dont use this for large files, \
     // create a tmpfile and assemble your multipart from there (not tested)
     w := multipart.NewWriter(buf)
     // Create file field
