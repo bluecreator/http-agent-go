@@ -26,7 +26,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("PUT:\n %v\n", resp)
 	buf := new(bytes.Buffer)
 	buf.ReadFrom(resp.Body)
@@ -43,7 +43,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("POST:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	buf.ReadFrom(resp.Body)
@@ -60,7 +60,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("GET:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	buf.ReadFrom(resp.Body)
@@ -77,7 +77,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("DELETE:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	buf.ReadFrom(resp.Body)
@@ -96,7 +96,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("GET:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	n, err := buf.ReadFrom(resp.Body)
@@ -119,7 +119,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("GET:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	n, err := buf.ReadFrom(resp.Body)
@@ -171,7 +171,7 @@ func Test_agent(t *testing.T) {
 	if nil != err {
 		fmt.Printf("%v\n", err)
 	}
-	fmt.Println(resp.Status=="200 OK")//check the response status
+	fmt.Println(resp.StatusCode==200)//check the response status
 	fmt.Printf("POST:\n %v\n", resp)
 	buf = new(bytes.Buffer)
 	n, err := buf.ReadFrom(resp.Body)
