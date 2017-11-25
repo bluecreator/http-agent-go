@@ -8,17 +8,18 @@ agent-go is an open source agent(proxy and adapter) that written in golang.
 - [ ] TODO 
   
 ### agent features
-- [X] HTTP proxy ( support GET PUT POST DELETE)    
-- [ ] HTTPS proxy ( support GET PUT POST DELETE)    
-- [X] FTP adaptor ( support GET POST DELETE)    
-- [ ] FTP adaptor ( support GET POST DELETE)    
-- [ ] FTP adaptor ( support GET POST DELETE)    
+- [X] HTTP proxy(support GET PUT POST DELETE)    
+- [ ] HTTPS proxy(support GET PUT POST DELETE)    
+- [X] FTP adaptor(support GET POST DELETE)    
+- [ ] SFTP adaptor(support GET POST DELETE)    
 
 ### admin features
-- [ ] black target list ( scheme://host:port)    
-- [ ] white target list ( scheme://host:port)    
-- [ ] access list ( method:host)    
+- [ ] black target list(host:port)    
+- [ ] white target list(host:port)    
+- [ ] access list(host)    
 - [ ] target key management   
+- [ ] download log file  
+- [ ] client and target mapping(host->host:port)
  
 ## Example     
 First, put target method(m), target url(u) to agent server's url as query string.    
