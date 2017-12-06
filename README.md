@@ -8,10 +8,10 @@ agent-go is an open source agent(proxy and adapter) that written in golang.
 - [ ] TODO 
   
 ### agent features
-- [X] HTTP proxy(support GET PUT POST DELETE)    
-- [ ] HTTPS proxy(support GET PUT POST DELETE)    
-- [X] FTP adaptor(support GET POST DELETE)    
-- [ ] SFTP adaptor(support GET POST DELETE)    
+- [X] HTTP proxy(support GET PUT POST DELETE to target server)    
+- [ ] HTTPS proxy(support GET PUT POST DELETE to target server)    
+- [X] FTP adaptor(support GET POST DELETE to target server)    
+- [ ] SFTP adaptor(support GET POST DELETE to target server)    
 
 ### admin features
 - [ ] black target list(host:port)    
@@ -30,10 +30,10 @@ Finally, get the response from target server.
 	var m, u string
 
 	u = "http://localhost:8001/test?a=1&b=2"
-	m = base64.StdEncoding.EncodeToString([]byte(http.MethodPut))
+	m = base64.StdEncoding.EncodeToString([]byte("PUT"))
 	u = base64.StdEncoding.EncodeToString([]byte(u))
 	client := &http.Client{}
-	req, err := http.NewRequest(http.MethodPost, "http://localhost:8000/agent?m="+m+"&u="+u, strings.NewReader("methodPut"))
+	req, err := http.NewRequest(http.MethodPost, "http://localhost:8000/agent?m="+m+"&u="+u, strings.NewReader("PUT http://localhost:8001/test?a=1&b=2"))
 	if nil != err {
 		fmt.Printf("%v\n", err)
 		return
