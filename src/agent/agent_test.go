@@ -168,7 +168,7 @@ func Test_agent(t *testing.T) {
 	fmt.Println(s)
 	buf.Reset()
 
-	m = base64.StdEncoding.EncodeToString([]byte(http.MethodPost))
+	m = base64.StdEncoding.EncodeToString([]byte(http.MethodPut))
 	u = "ftp://cme:CMEpassword1&@172.16.4.14:2121/a/"
 	u = base64.StdEncoding.EncodeToString([]byte(u))
 

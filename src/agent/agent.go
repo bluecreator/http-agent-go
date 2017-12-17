@@ -157,7 +157,7 @@ func agent(w http.ResponseWriter, r *http.Request) {
 				return
 			}
 
-		case strings.EqualFold(http.MethodPost, m) && strings.HasPrefix(u, "ftp"):
+		case strings.EqualFold(http.MethodPut, m) && strings.HasPrefix(u, "ftp"):
 			err = r.ParseMultipartForm(16 << 10) //16M
 			if nil != err {
 				log.Printf("%v\n", err)

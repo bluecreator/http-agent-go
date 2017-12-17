@@ -55,5 +55,32 @@ Finally, get the response from target server.
 	s := buf.String()
 	fmt.Println(s)
 	buf.Reset()
+	
+	
+	m = base64.StdEncoding.EncodeToString([]byte(http.MethodGet))
+	u = "ftp://cme:CMEpassword1&@172.16.4.14:2121/a/admin.go"
+	u = base64.StdEncoding.EncodeToString([]byte(u))
+	req, err = http.NewRequest(http.MethodPost, "http://localhost:8000/agent?m="+m+"&u="+u, nil)
+	if nil != err {
+		fmt.Printf("%v\n", err)
+		return
+	}
+	resp, err = client.Do(req)
+	if nil != err {
+		fmt.Printf("%v\n", err)
+		return
+	}
+	fmt.Println(resp.StatusCode == 200) //check the response status
+	fmt.Printf("GET:\n %v\n", resp)
+	buf = new(bytes.Buffer)
+	n, err = buf.ReadFrom(resp.Body)
+	if nil != err {
+		fmt.Printf("%v\n", err)
+		return
+	}
+	fmt.Println(n)
+	s = buf.String()
+	fmt.Println(s)
+	buf.Reset()
 ```
 
